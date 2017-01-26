@@ -121,7 +121,6 @@ class Voivodeship:
 
         return locations_belonging_to_many_categories
 
-
     def advanced_search(self, searched_location):
         '''Method that search for location based on the given name or part of given name.'''
 
@@ -156,7 +155,6 @@ class Voivodeship:
 
             elif element[1] == '9':
                 element[1] = 'delegatura'
-
 
         if results:
             return sorted(results)
@@ -242,177 +240,8 @@ class Community:
         return '{}, {}, {}'.format(self.community_number,self.community_name, self.type_of_community)
 
 
-class Display:
-    '''Class that serves for displaying information returned by methods used by instances of other classes.'''
-
-    def __init__(self, headings, content):
-        '''Method that creates instance of Display class.'''
-
-        self.headings = headings
-        self.content = content
-
-
-    def get_width_columns(self):
-        '''Determines width of columns necessary for table of data so that all content fits within column.'''
-
-        column_width = []
-
-
-        for heading in self.headings:
-            for element in self.content:
-                print(element)
-                if len(heading) > len(element):
-                    column_width.append(len(heading) + 2)
-                    print(heading)
-
-                else:
-                    column_width.append(len(element) + 2)
 
 
 
-        columns_width = sorted(column_width)[-len(self.headings):]
-        print(columns_width)
-
-        return (columns_width)
-
-
-    def get_table_many_headings_many_columns(self,column_width,total_width):
-        '''Method that returns table with many headings and many columns.'''
-
-        output = ''
-
-        output += '/' + ('-' * (total_width + 1)) + '\\' + '\n'  # adding headings
-
-        for heading in range(len(self.headings)):
-            output += '|{0:^{1}}|'.format(self.headings[heading], column_width[heading])  # adding headings
-        output += '\n'
-        output += ('-' * (total_width + 3))
-        output += '\n'
-        row = 0
-
-        while row < len(self.content):  # adding rows
-
-            for heading in range(len(self.headings)):
-                output += '|{0:^{1}}|'.format(self.content[row], column_width[heading])
-
-                row += 1
-
-            output += '\n'
-            output += ('-' * (total_width + 3))
-            output += '\n'
-        output += '\\' + ('-' * (total_width + 1)) + '/'
-
-        return output.replace('||', '|')
-
-    def get_table_one_heading_many_columns(self,column_width,total_width):
-        '''Method that returns table with one heading and two columns.'''
-
-        output = ''
-        output += '/' + ('-' * (total_width + column_width[0] + 1)) + '\\' + '\n'  # adding heading
-
-        output += '|{0:^{1}}|'.format(self.headings[0], column_width[0] + 1 + total_width)
-        output += '\n'
-        output += ('-' * (total_width + column_width[0] + 3))
-        output += '\n'
-        row = 0
-        columns = 2
-
-        while row < len(self.content):  # adding rows with 2 columns
-            try:
-                for heading in range(columns):
-                    output += '|{0:^{1}}|'.format(self.content[row], column_width[0])
-
-                    row += 1
-
-                output += '\n'
-                output += ('-' * (total_width + column_width[0] + 3))
-                output += '\n'
-            except IndexError:
-                output += '\n'
-                output += ('-' * (total_width + column_width[0] + 3))
-                output += '\n'
-                break
-
-        output += '\\' + ('-' * (total_width + column_width[0] + 1)) + '/'
-
-        return output.replace('||', '|')
-
-    def get_table_one_column(self, column_width,total_width):
-        '''Method that returns table with one column and one heading.'''
-
-        output = ''
-        output += '/' + ('-' * (total_width + 1)) + '\\' + '\n'
-
-        output += '|{0:^{1}}|'.format(self.headings[0], column_width[0] + 1) # adding heading
-        output += '\n'
-        output += ('-' * (total_width + 3))
-        output += '\n'
-        row = 0
-        column = 1
-        while row < len(self.content):
-
-            for heading in range(column):
-                output += '|{0:^{1}}|'.format(self.content[row], column_width[heading] + 1)
-
-                row += 1
-
-            output += '\n'
-            output += ('-' * (total_width + 3))
-            output += '\n'
-        output += '\\' + ('-' * (total_width + 1)) + '/'
-
-        return output.replace('||', '|')
-
-
-    def get_table(self, option):
-        '''Prints out table with information about territorial units.'''
-
-        column_width = self.get_width_columns()
-
-        total_width = 0
-        for element in column_width:
-            total_width += element
-
-
-        if option == '1':
-            return self.get_table_many_headings_many_columns(column_width,total_width)
-
-        elif option == '2':
-            return self.get_table_one_heading_many_columns(column_width,total_width)
-
-        elif option == '3':
-            return self.get_table_one_column(column_width,total_width)
-
-
-
-
-
-
-Voivodeship.loading_data_from_file('malopolska.csv')
-#
-#
-Malopolska = Voivodeship.VOIVODESHIPS[0]
-#
-# print(Malopolska.statistics('MAŁOPOLSKIE'))
-#
-# print(Malopolska.longest_names('MAŁOPOLSKIE'))
-#
-# print(Malopolska.county_largest_number_communities('MAŁOPOLSKIE'))
-#
-# print(Malopolska.locations_belonging_to_more_categories('MAŁOPOLSKIE'))
-#
-print(Malopolska.advanced_search('Nowy'))
-#
-#
-# display_statistics = Display([ 'Małopolska'],Malopolska.statistics('MAŁOPOLSKIE'))
-#
-# string = Malopolska.longest_names('MAŁOPOLSKIE')
-#
-# e = list(string) * 2
-# display_longest_names = Display(['Najdłuższa nazwa'], Malopolska.longest_names('MAŁOPOLSKIE'))
-#
-# print(display_statistics.get_table('2'))
-#
-# print(display_longest_names.get_table('3'))
 
 
