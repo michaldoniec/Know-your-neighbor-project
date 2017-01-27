@@ -16,9 +16,8 @@ def menu():
 
 
 def options(option,choosen_voivodeship):
-    '''Function that collects input and based on that input appropriate method from Voivodship class is initiated,
-    instance of Display class is created and appropriate method from display class is initiated by the instance of this
-    class..'''
+    '''Function that  based on collected  input initiates appropriate method from instance of Voivodship class,
+    creates instance of Display class and initiates appropriate method from this instance.'''
 
     if option == '1':
         display_statistics = Display([choosen_voivodeship.voivodeship_name],
@@ -90,7 +89,7 @@ def start_menu(choosen_voivodeship):
 
 def main():
     '''Function that enables selection of Voivodeship.'''
-    Voivodeship.loading_data_from_file('malopolska.csv')
+    Voivodeship.load_data_from_file('malopolska.csv')
 
     available_voivodships = ['Małopolskie']
 

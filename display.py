@@ -65,7 +65,7 @@ class Display:
 
         return output.replace('||', '|')
 
-    def get_table_one_heading_many_columns(self,column_width,total_width):
+    def get_table_one_heading_two_columns(self,column_width,total_width):
         '''Method that returns table with one heading and two columns.'''
 
         output = ''
@@ -140,7 +140,7 @@ class Display:
             return self.get_table_many_headings_many_columns(column_width,total_width)
 
         elif option == '2':
-            return self.get_table_one_heading_many_columns(column_width,total_width)
+            return self.get_table_one_heading_two_columns(column_width,total_width)
 
         elif option == '3':
             return self.get_table_one_column(column_width,total_width)

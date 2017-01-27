@@ -170,7 +170,7 @@ class Voivodeship:
 
 
     @classmethod
-    def loading_data_from_file(cls, filename):
+    def load_data_from_file(cls, filename):
         '''Method that loads data from csv file and based on that data creates instances of Voivodeship class, instances
          of Count class and instances of Community class.'''
 
@@ -193,7 +193,7 @@ class Voivodeship:
                     created_count = Count(row_data[1], row_data[2], row_data[3])
 
                     if row_data[0] == created_voivodeship.voivodeship_number:
-                        created_voivodeship.add_count(created_count)        #
+                        created_voivodeship.add_count(created_count)
 
                 elif len(row_data) == 6:
                     if row_data[1] == created_count.count_number:
